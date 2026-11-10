@@ -54,7 +54,8 @@ In this stage, you will complete interactive GitHub training modules and inspect
 
 ### Step 2.1: Audit `SorrentoMarina` Test Architecture
 
-Inspect the test structure in the `SorrentoMarina` repository to understand how unit tests are organized:
+Inspect the test structure in the `SorrentoMarina` repository to understand how unit tests are organized.
+Please consider that the examples were developed with JUnit 5. However, JUnit 6 is backward compatible with these tests.
 
 ```
 src/test/java/theboys/sorrentomarina/
@@ -283,6 +284,8 @@ Leverage GitHub Copilot or other AI tools to help generate test cases, but alway
 - Add missing edge cases
 - Ensure tests follow the FIRST principles
 - Verify test names are descriptive
+
+The tests can use either JUnit 5 or JUnit 6 syntax since both work with the JUnit 6.1.3 dependency.
 
 ### Step 4.3: Mock External Dependencies with Mockito 5
 
