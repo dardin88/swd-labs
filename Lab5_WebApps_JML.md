@@ -2,7 +2,7 @@
 
 Welcome to Lab 5! In this lab, you will learn how to apply **JML (Java Modeling Language)** specifications to web applications. You will add **preconditions**, **postconditions**, and **invariants** to Java classes and verify them using **OpenJML**.
 
-You can leverage these resource:
+You can leverage these resources:
 - [OpenJML Installation Guide](https://www.openjml.org/installation.html)
 - [OpenJML Tutorial](https://www.openjml.org/tutorial/)
 - [JML Language Specification](https://www.openjml.org/jmlspecs/)

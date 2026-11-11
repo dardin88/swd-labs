@@ -6,6 +6,11 @@ This lab introduces Kubernetes orchestration using Minikube, a tool that allows 
 
 **Important Note:** This tutorial does not entail any report. The goal is to gain hands-on experience with Kubernetes orchestration using Minikube.
 
+You can find more resources on the course slides.
+
+Before starting this lab, ensure you have completed the following:
+- **Lab2a_containerization.md**: Lab Guide: Containerization with Docker, Docker Compose, and Podman
+
 ---
 
 ## 1. Prerequisites & Required Tools

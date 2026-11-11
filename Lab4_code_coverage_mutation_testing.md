@@ -1,10 +1,10 @@
-# Lab Guide: Code Coverage and Mutation Testing for Software Dependability
+# Lab Guide: Code Coverage and Mutation Testing with Jacoco and PiTest
 
 Welcome to the hands-on lab session on **Code Coverage and Mutation Testing**!
 
 In this session, you will learn how to measure and improve your test suite's effectiveness using **JaCoCo** for code coverage analysis and **PITest** for mutation testing. You will also integrate these metrics into your **CI/CD pipeline** using **CodeCov** for visualization and tracking. This lab builds on what you learned in **Lab 3: Writing Test Cases with JUnit and Mockito**, where you created comprehensive unit tests.
 
-You can leverage these resource:
+You can leverage these resources:
 - [JaCoCo Documentation](https://www.jacoco.org/jacoco/)
 - [PITest Documentation](https://pitest.org/)
 - [CodeCov Documentation](https://docs.codecov.com/)

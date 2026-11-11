@@ -11,6 +11,10 @@ You can leverage these resources:
 - [JU2JMH GitHub Repository](https://github.com/alniniclas/junit-to-jmh/)
 - [AMBER GitHub Repository](https://github.com/AntonioTrovato/AMBER)
 
+Before starting this lab, ensure you have completed the following:
+- **Lab1_CICD.md**: Continuous Integration & Continuous Delivery (CI/CD) for Software Dependability
+- **Lab3_writing_test_cases.md**: Lab Guide: Writing Test Cases with JUnit and Mockito
+
 ---
 
 ## 1. Prerequisites & Required Tools

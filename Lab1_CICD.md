@@ -1,4 +1,4 @@
-# Lab Guide: Continuous Integration & Continuous Delivery (CI/CD) for Software Dependability
+# Lab Guide: Continuous Integration & Continuous Delivery (CI/CD)
 
 Welcome to the hands-on lab session on **Continuous Integration and Continuous Delivery (CI/CD)**!
 
