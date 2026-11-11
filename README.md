@@ -1,5 +1,5 @@
 # Software Dependability Labs
-This repo features the labs of the [Software Dependability course at the University of Salerno](https://docenti.unisa.it/029186/en/teaching?anno=2026&id=524106&cId=10004-2026&pId=N0*N0*S1).
+This repo features the lab assignments of the [Software Dependability course at the University of Salerno](https://docenti.unisa.it/029186/en/teaching?anno=2026&id=524106&cId=10004-2026&pId=N0*N0*S1).
 
 ## Lab Sessions
 
