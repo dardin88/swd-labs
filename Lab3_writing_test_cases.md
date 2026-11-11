@@ -2,9 +2,14 @@
 
 Welcome to the hands-on lab session on **Writing Test Cases with JUnit and Mockito**!
 
-In this session, you will learn how to write effective unit tests using JUnit and Mockito, with the assistance of AI agents like GitHub Copilot. You will apply the FIRST principles of test-driven development to ensure your tests are Fast, Independent, Repeatable, Self-validating, and Thorough. You can leverage these resources:
+In this session, you will learn how to write effective unit tests using JUnit and Mockito, with the assistance of AI agents like GitHub Copilot. You will apply the FIRST principles of test-driven development to ensure your tests are Fast, Independent, Repeatable, Self-validating, and Thorough. 
+
+You can leverage these resources:
 - [JUnit 6 User Guide](https://junit.org/junit5/docs/current/user-guide/)
 - [Mockito Documentation](https://site.mockito.org/)
+
+Before starting this lab, ensure you have completed the following:
+- **Lab1_CICD.md**: Continuous Integration & Continuous Delivery (CI/CD) for Software Dependability
 
 ---
 

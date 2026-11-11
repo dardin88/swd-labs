@@ -10,6 +10,10 @@ You can leverage these resource:
 - [CodeCov Documentation](https://docs.codecov.com/)
 - [Baeldung Guide on Mutation Testing](https://www.baeldung.com/java-mutation-testing-with-pitest)
 
+Before starting this lab, ensure you have completed the following:
+- **Lab1_CICD.md**: Continuous Integration & Continuous Delivery (CI/CD) for Software Dependability
+- **Lab3_writing_test_cases.md**: Writing Test Cases with JUnit and Mockito
+
 ---
 
 ## 1. Prerequisites & Required Tools
@@ -26,8 +30,6 @@ Before starting, ensure you have configured the following environments and resou
   git clone https://github.com/dardin88/SorrentoMarina.git
   cd SorrentoMarina
   ```
-
----
 
 ### Gradle Quick Reference
 

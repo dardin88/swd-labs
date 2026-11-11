@@ -1,7 +1,5 @@
 # Lab Guide: Containerization & Orchestration for Software Dependability
 
-## Prerequisites
-
 Welcome to the hands-on lab session on **Containerization**! 
 
 In this session, you will learn how container technologies like **Docker**, **Docker Compose**, and **Podman** contribute to **Software Dependability**—specifically focusing on environment reproducibility, system isolation, fault recovery, and security models.
