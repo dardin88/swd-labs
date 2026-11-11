@@ -151,7 +151,7 @@ Perform this fault injection test to observe data safety and automatic recovery:
 
 ---
 
-## 5. Stage 4: Course Project Application (Student Task)
+## 5. Stage 4: Course Project Application (Student Assignment)
 
 Now it is time to apply these containerization practices to your **own web application** developed for your Software Dependability course project!
 

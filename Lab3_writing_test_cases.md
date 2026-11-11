@@ -268,7 +268,7 @@ testImplementation 'org.mockito:mockito-junit-jupiter:5.24.0'
 
 ---
 
-## 5. Stage 4: Course Project Application (Student Task)
+## 5. Stage 4: Course Project Application (Student Assignment)
 
 Now it's time to apply what you've learned to your course project! Follow these steps to integrate testing into your project:
 

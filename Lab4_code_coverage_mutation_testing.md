@@ -482,7 +482,7 @@ Add badges to your repository's README.md:
 
 ---
 
-## 6. Stage 5: Course Project Application (Student Task)
+## 6. Stage 5: Course Project Application (Student Assignment)
 
 Now it's time to apply what you've learned to your course project!
 
