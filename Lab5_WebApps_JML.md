@@ -203,27 +203,127 @@ public class User {
 }
 ```
 
-## 6. Stage 5: Software Components Suitable for Formal Verification in Web Applications
+## 6. Stage 5: Course Project Application (Student Task)
 
-When applying formal verification techniques like JML to web applications, focus on:
+Now it's time to apply what you've learned to your course project! Follow these steps to add formal specifications and verify them:
 
-- **Business logic classes**: Classes that encapsulate core business rules (e.g., `UserService`, `OrderService`).
-- **Data validation**: Methods that validate user input or ensure data integrity.
-- **State management**: Classes that manage application state (e.g., `SessionManager`, `CacheManager`).
-- **Security checks**: Methods that enforce security policies (e.g., `AuthenticationService`, `AuthorizationService`).
+### Step 5.1: Identify Verifiable Components
 
-Avoid formal verification for:
-- **Controller classes**: These typically delegate to service classes and are less suitable for formal verification.
-- **View/presentation logic**: Classes responsible for rendering views or formatting output.
-- **Third-party integrations**: Classes that interact with external APIs or services.
+Review your project and identify the key components that can benefit from formal specifications. When applying formal verification techniques like JML to web applications, focus on:
+
+**Components Suitable for Formal Verification:**
+- **Service classes**: Core business logic (e.g., `UserService`, `OrderService`, `PaymentService`)
+- **Data validation**: Input validation and data transformation layers
+- **State management**: Classes that manage application state (e.g., `SessionManager`, `CacheManager`)
+- **Security checks**: Methods that enforce security policies (e.g., `AuthenticationService`, `AuthorizationService`)
+
+**Components to Avoid:**
+- Controller classes (these typically delegate to service classes and are less suitable for formal verification)
+- View/presentation logic classes (responsible for rendering views or formatting output)
+- Third-party integration classes (classes that interact with external APIs or services)
+
+### Step 5.2: Add JML Specifications
+
+For each identified component, add appropriate JML specifications:
+
+1. **Class Invariants**: Define invariants that must always hold true for the object's state
+2. **Preconditions**: Specify requirements for method parameters and object state
+3. **Postconditions**: Specify guarantees about method behavior and side effects
+4. **Pure Methods**: Mark getter methods and other non-modifying methods as pure
+
+**Example for a UserService class:**
+```java
+public class UserService {
+    private Map<String, User> users = new HashMap<>();
+    
+    /** Class invariant: users map cannot be null. */
+    //@ public invariant users != null;
+    
+    /** Add a user to the service. */
+    /*@ public normal_behavior
+      @   requires user != null && !username.isEmpty();
+      @   assignable users;
+      @   ensures users.containsKey(username);
+      @   ensures \result == true;
+      @*/
+    public boolean addUser(String username, User user) {
+        users.put(username, user);
+        return true;
+    }
+    
+    /** Get a user by username. */
+    /*@ public normal_behavior
+      @   requires username != null;
+      @   assignable \nothing;
+      @   ensures \result != null ==> \result.getUsername().equals(username);
+      @*/
+    public User getUser(String username) {
+        return users.get(username);
+    }
+}
+```
+
+### Step 5.3: Configure OpenJML
+
+Set up OpenJML for your project:
+
+1. Add OpenJML to your project's build configuration
+2. Configure your IDE to recognize JML annotations
+3. Set up appropriate build scripts or Maven/Gradle plugins
+
+### Step 5.4: Static Verification with ESC
+
+Use ESC to statically verify your specifications:
+
+```bash
+# Verify a single file
+openjml -esc src/main/java/com/example/UserService.java
+
+# Verify all Java files in a directory
+find src/main/java -name "*.java" -exec openjml -esc {} \;
+```
+
+Address any verification errors by:
+- Refining your specifications
+- Fixing implementation bugs
+- Adjusting invariants or preconditions
+
+### Step 5.5: Runtime Verification with RAC
+
+Use RAC to runtime-verify your specifications:
+
+```bash
+# Compile with RAC
+mkdir -p target/rac
+openjml -rac -d target/rac src/main/java/com/example/UserService.java
+
+# Run with assertions enabled
+java -ea -cp target/rac com.example.UserService
+```
+
+Test edge cases and error conditions to ensure your specifications hold at runtime.
+
+### Step 5.6: Document Your JML Verification Results
+
+After completing the verification tasks, document your findings in a `verification.md` (maximum **5,000 characters**) file in your project's root directory. This file should include:
+
+- **Verification Setup**: Describe how you set up OpenJML and configured your project for verification.
+- **Specifications Added**: List all the preconditions, postconditions, and invariants you added to your project's classes.
+- **ESC Results**: Report the results of static verification using ESC. Include any errors or warnings encountered and how you addressed them.
+- **RAC Results**: Report the results of runtime verification using RAC. Include any assertion failures and how you debugged them.
+- **Verification Success**: Confirm which specifications were successfully verified and which ones failed.
+- **Lessons Learned**: Discuss what you learned about writing effective JML specifications and the challenges you encountered.
+
+---
 
 ## Submission Checklist
 
 Before submitting your work, ensure you have:
 - [ ] Set up OpenJML in your project.
-- [ ] Added preconditions, postconditions, and invariants to the `User` class.
+- [ ] Identified verifiable components in your course project.
+- [ ] Added preconditions, postconditions, and invariants to your project's core classes.
 - [ ] Used ESC to statically verify the specifications.
 - [ ] Used RAC to runtime-verify the specifications.
-- [ ] Identified software components suitable for formal verification in web applications.
+- [ ] Documented your JML verification results in a `verification.md` file (max 5,000 characters).
 - [ ] Interpreted verification results and debugged specification errors.
-- [ ] Documented your approach and findings in a `verification.md` file (max 5,000 characters).
+- [ ] Committed the `verification.md` file to your GitHub repository.
