@@ -42,7 +42,7 @@ In this stage, you will complete interactive GitHub training modules and inspect
 
 ### Step 2.1: Complete GitHub Skills Modules
 1. Navigate to [GitHub Skills](https://learn.github.com/skills).
-2. Complete the **GitHub Actions: Hello World** and **Build and Test Code** starter skills.
+2. Complete the **GitHub Actions: Hello World** and **Test with Actions** starter skills.
 3. Observe how workflows trigger automatically on `push` or `pull_request` events.
 
 ### Step 2.2: Audit `SorrentoMarina` GitHub Workflow Architecture
@@ -132,8 +132,6 @@ jobs:
 
 Now you will build and attach a robust CI/CD pipeline to your **own web application** repository for your Software Dependability course project!
 
-### Student Requirements
-
 #### Task 3.1: Custom GitHub Workflow Creation (`.github/workflows/ci.yml`)
 Create a custom workflow file in your project repository under `.github/workflows/ci.yml`. Your pipeline must perform the following stages automatically:
 
@@ -141,9 +139,7 @@ Create a custom workflow file in your project repository under `.github/workflow
 2. **Automated Testing:** Run your application's test suite (e.g., `npm test`, `pytest`, `mvn test`).
 
 #### Task 3.2: CI/CD Documentation & Self-Audit (`CICD.md`)
-Create a report named `CICD.md` (maximum **5,000 characters**) in your project repository and link to it from your root `README.md`. Your report must include:
-
-1. **Pipeline Architecture Overview:** Explain the stages of your `.github/workflows/ci.yml` file and describe how your pipeline guarantees build reproducibility and code quality.
+Create a report named `CICD.md` (maximum **5,000 characters**) in your project repository and link to it from your root `README.md`. Your report must explain the stages of your `.github/workflows/ci.yml` file and describe how your pipeline guarantees build reproducibility and code quality.
 
 ---
 
