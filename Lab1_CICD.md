@@ -12,7 +12,7 @@ Before starting, ensure you have configured the following environments and resou
 
 * **GitHub Account:** Register for student benefits via [GitHub Education](https://github.com/education).
 * **GitHub Skills:** Access the hands-on interactive courses at [GitHub Skills](https://learn.github.com/skills).
-* **Git & Docker Desktop / Docker Engine** (installed during Lab 1).
+* **Git**.
 * **Course Reference Repository:** Clone or update your local copy of `SorrentoMarina`:
   ```bash
   git clone https://github.com/dardin88/SorrentoMarina.git
