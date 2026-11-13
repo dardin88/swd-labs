@@ -28,7 +28,7 @@ Before starting, ensure you have installed and verified the following tools on y
 
 ## 2. Stage 1: Theory & Lecture Alignment
 
-Review the provided lecture slides (`Lab1_Containerization.pdf`) and keep the following key architectural concepts in mind:
+Review the provided lecture slides (`Lab2a_Containerization.pdf`) and keep the following key architectural concepts in mind:
 
 ### Key Dependability Concepts
 1. **DevOps & Continuous Architecting:** Transitioning software from monolithic architectures to isolated microservices improves maintainability and deployment independence.
