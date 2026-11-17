@@ -84,7 +84,17 @@ For a comprehensive overview of Docker antipatterns and best practices, see:
 - [Docker Building Best Practices](https://docs.docker.com/build/building/best-practices/)
 - [Docker: Build Secrets](https://docs.docker.com/build/building/secrets/)
 
-### Step 2.3: Build & Run `SorrentoMarina` Single Container
+### Step 2.3: Audit the Reference Workflow
+
+Audit the reference workflow at [https://github.com/dardin88/SorrentoMarina/blob/main/.github/workflows/docker-build.yml](https://github.com/dardin88/SorrentoMarina/blob/main/.github/workflows/docker-build.yml) and answer the following questions:
+
+1. **Trigger Mechanism**: How does the workflow ensure it only runs after the CI/CD pipeline succeeds?
+2. **Secrets Management**: How are DockerHub credentials securely managed in the workflow?
+3. **Multi-Platform Support**: What platforms does the workflow build for, and why is this important?
+4. **Caching**: How does the workflow optimize build times using caching?
+5. **Metadata Handling**: How are image tags dynamically generated in the workflow?
+
+### Step 2.4: Build & Run `SorrentoMarina` Single Container
 Run the following commands in your terminal to build and run the reference application:
 
 ```bash
@@ -257,17 +267,7 @@ jobs:
         cache-to: type=gha,mode=max
 ```
 
-### Step 5.2: Audit the Reference Workflow
-
-Audit the reference workflow at [https://github.com/dardin88/SorrentoMarina/blob/main/.github/workflows/docker-build.yml](https://github.com/dardin88/SorrentoMarina/blob/main/.github/workflows/docker-build.yml) and answer the following questions:
-
-1. **Trigger Mechanism**: How does the workflow ensure it only runs after the CI/CD pipeline succeeds?
-2. **Secrets Management**: How are DockerHub credentials securely managed in the workflow?
-3. **Multi-Platform Support**: What platforms does the workflow build for, and why is this important?
-4. **Caching**: How does the workflow optimize build times using caching?
-5. **Metadata Handling**: How are image tags dynamically generated in the workflow?
-
-### Step 5.3: Configure DockerHub Secrets
+### Step 5.2: Configure DockerHub Secrets
 
 1. **Create a DockerHub Account**: If you don’t have one, sign up at [DockerHub](https://hub.docker.com/).
 2. **Create a Repository**: Create a new repository on DockerHub to store your images.
@@ -278,7 +278,7 @@ Audit the reference workflow at [https://github.com/dardin88/SorrentoMarina/blob
      - `DOCKER_USERNAME`: Your DockerHub username.
      - `DOCKER_PASSWORD`: A personal access token (not your password) with read/write permissions.
 
-### Step 5.4: Test the Workflow
+### Step 5.3: Test the Workflow
 
 1. **Push Changes**: Commit and push your changes to the `main` branch.
 2. **Monitor Workflow**: Go to the **Actions** tab in your GitHub repository to monitor the workflow execution.
