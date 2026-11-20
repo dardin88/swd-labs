@@ -259,7 +259,7 @@ By default, PITest uses a standard set of mutation operators. You can customize 
 
 #### Available Mutation Operators
 
-PITest includes various mutation operators that simulate different types of bugs. You can find the complete list of mutation operators in the [official PITest documentation](https://pitest.org/quickstart/mutation_operators/).
+PITest includes various mutation operators that simulate different types of bugs. You can find the complete list of mutation operators in the [official PITest documentation](https://pitest.org/quickstart/mutators/).
 
 Common mutation operators include:
 - **Conditionals Boundary** - Changes relational operators (<, >, <=, >=)
