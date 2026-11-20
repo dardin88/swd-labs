@@ -1,4 +1,4 @@
-# Lab Guide: Code Coverage and Mutation Testing with Jacoco and PiTest
+# Lab Guide: Code Coverage and Mutation Testing with JaCoCo and PiTest
 
 Welcome to the hands-on lab session on **Code Coverage and Mutation Testing**!
 
@@ -74,7 +74,7 @@ Add the JaCoCo Maven plugin to your `pom.xml` file:
         <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.12</version>
+            <version>0.8.16</version>
             <executions>
                 <execution>
                     <id>prepare-agent</id>
@@ -105,12 +105,9 @@ mvn clean test
 
 # Generate coverage report
 mvn jacoco:report
-
-# View the report
-open target/site/jacoco/index.html
 ```
 
-The report will open in your default browser, showing:
+Open the report saved in `target/site/jacoco/index.html` using your default browser. It will show:
 - Line coverage (green = covered, red = uncovered)
 - Branch coverage
 - Method coverage
@@ -136,7 +133,7 @@ Add the following code to your JaCoCo plugin configuration to enforce quality ga
 <plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>
-    <version>0.8.12</version>
+    <version>0.8.16</version>
     <executions>
         <execution>
             <id>prepare-agent</id>
@@ -227,12 +224,12 @@ Add the PITest Maven plugin to your `pom.xml` file:
         <plugin>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
-            <version>1.16.0</version>
+            <version>1.30.2</version>
             <dependencies>
                 <dependency>
                     <groupId>org.pitest</groupId>
                     <artifactId>pitest-junit5-plugin</artifactId>
-                    <version>1.2.1</version>
+                    <version>1.2.3</version>
                 </dependency>
             </dependencies>
             <configuration>
@@ -280,12 +277,12 @@ To configure specific mutation operators, add the `<mutators>` configuration to 
 <plugin>
     <groupId>org.pitest</groupId>
     <artifactId>pitest-maven</artifactId>
-    <version>1.16.0</version>
+    <version>1.30.2</version>
     <dependencies>
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-junit5-plugin</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.3</version>
         </dependency>
     </dependencies>
     <configuration>
@@ -329,12 +326,12 @@ Add these configuration parameters to your PITest plugin:
 <plugin>
     <groupId>org.pitest</groupId>
     <artifactId>pitest-maven</artifactId>
-    <version>1.16.0</version>
+    <version>1.30.2</version>
     <dependencies>
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-junit5-plugin</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.3</version>
         </dependency>
     </dependencies>
     <configuration>
