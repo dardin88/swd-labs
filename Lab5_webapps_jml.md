@@ -203,7 +203,24 @@ public class User {
 }
 ```
 
-## 6. Stage 5: Course Project Application (Student Assignment)
+
+## Using OpenJML with Lombok
+
+If your project uses **Lombok** (e.g., `@Getter`, `@Setter`, `@Data`), OpenJML may not be able to verify your specifications because Lombok generates code at compile time. To use OpenJML with Lombok, you should "delombok" your source code before running OpenJML.
+
+### How to Delombok
+
+1.  **Locate `lombok.jar`**: Find the `lombok.jar` file in your project or download it from [projectlombok.org](https://projectlombok.org/).
+2.  **Run Delombok**: Use the following command to generate delomboked Java files into a new directory:
+    ```bash
+    java -jar lombok.jar delombok src -d src-delomboked
+    ```
+    *Replace `src` with your source directory and `src-delomboked` with your desired output directory.*
+3.  **Run OpenJML**: Run OpenJML on the generated files in the `src-delomboked` directory instead of the original `src` directory:
+    ```bash
+    openjml -esc src-delomboked/com/example/UserService.java
+    ```
+
 
 Now it's time to apply what you've learned to your course project! Follow these steps to add formal specifications and verify them:
 
@@ -263,13 +280,20 @@ public class UserService {
 }
 ```
 
-### Step 5.3: Configure OpenJML
+### Step 5.3: Configure OpenJML Paths
 
-Set up OpenJML for your project:
+To verify your project, OpenJML needs to know where your compiled classes, source files, and JML specifications are located. You can specify these using the following flags:
 
-1. Add OpenJML to your project's build configuration
-2. Configure your IDE to recognize JML annotations
-3. Set up appropriate build scripts or Maven/Gradle plugins
+- **Classpath (`-cp` or `--class-path`)**: The location of your compiled `.class` files or JARs.
+- **Sourcepath (`-sourcepath` or `--source-path`)**: The location of your `.java` source files.
+- **Specspath (`--specs-path`)**: The location of your `.jml` files (if you use separate files instead of in-line JML).
+
+**Example Command:**
+If your project is in a folder called `project_root`, and you have a `lib` folder for dependencies, you might run:
+```bash
+openjml -esc -cp "project_root/lib;project_root/bin" -sourcepath project_root/src -specs-path project_root/src src/main/java/com/example/UserService.java
+```
+*Note: On macOS/Linux, use `:` as a separator; on Windows, use `;`.*
 
 ### Step 5.4: Static Verification with ESC
 
@@ -277,10 +301,10 @@ Use ESC to statically verify your specifications:
 
 ```bash
 # Verify a single file
-openjml -esc src/main/java/com/example/UserService.java
+openjml -esc -cp "project_root/lib;project_root/bin" -sourcepath project_root/src -specs-path project_root/src src/main/java/com/example/UserService.java
 
 # Verify all Java files in a directory
-find src/main/java -name "*.java" -exec openjml -esc {} \;
+find src/main/java -name "*.java" -exec openjml -esc -cp "project_root/lib;project_root/bin" -sourcepath project_root/src -specs-path project_root/src {} \;
 ```
 
 Address any verification errors by:
@@ -295,7 +319,7 @@ Use RAC to runtime-verify your specifications:
 ```bash
 # Compile with RAC
 mkdir -p target/rac
-openjml -rac -d target/rac src/main/java/com/example/UserService.java
+openjml -rac -d target/rac -cp "project_root/lib;project_root/bin" -sourcepath project_root/src -specs-path project_root/src src/main/java/com/example/UserService.java
 
 # Run with assertions enabled
 java -ea -cp target/rac com.example.UserService
