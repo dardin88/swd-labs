@@ -3,9 +3,9 @@
 Welcome to Lab 5! In this lab, you will learn how to apply **JML (Java Modeling Language)** specifications to web applications. You will add **preconditions**, **postconditions**, and **invariants** to Java classes and verify them using **OpenJML**.
 
 You can leverage these resources:
-- [OpenJML Installation Guide](https://www.openjml.org/installation.html)
+- [OpenJML Downloads and Installation Guide](https://www.openjml.org/downloads/)
 - [OpenJML Tutorial](https://www.openjml.org/tutorial/)
-- [JML Language Specification](https://www.openjml.org/jmlspecs/)
+- [JML Reference Manual](https://www.openjml.org/documentation/JML_Reference_Manual.pdf)
 
 Before starting this lab, ensure you have completed the following:
 - **Lab1_CICD.md**: Continuous Integration & Continuous Delivery (CI/CD) for Software Dependability
@@ -20,7 +20,6 @@ Before starting, ensure you have configured the following environments and resou
 * **Java Development Kit (JDK)** installed.
 * **OpenJML** installed and available in your PATH (see Stage 2).
 * **IntelliJ IDEA or VS Code** with Java extensions installed.
-* Basic understanding of Java classes and methods.
 * **Course Project Repository:** Your local copy of the web application developed for the course project.
 
 ---
@@ -40,7 +39,7 @@ Review your lecture slides on **Formal Verification and Design by Contract**, ke
 
 ## 3. Stage 2: Setting Up OpenJML
 
-To use OpenJML, you need to have it installed and available in your PATH. Follow the instructions at [https://www.openjml.org/installation.html](https://www.openjml.org/installation.html) to set up OpenJML.
+To use OpenJML, you need to have it installed and available in your PATH. Follow the installation instructions at [https://www.openjml.org/downloads/](https://www.openjml.org/downloads/) to set up OpenJML.
 
 ## 4. Stage 3: Understanding JML Specifications
 
