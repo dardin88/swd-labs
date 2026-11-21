@@ -46,7 +46,7 @@ In this stage, you will complete interactive GitHub training modules and inspect
 3. Observe how workflows trigger automatically on `push` or `pull_request` events.
 
 ### Step 2.2: Audit `SorrentoMarina` GitHub Workflow Architecture
-Inspect the `.github/workflows/ci.yml` pipeline file in the reference repository to understand how automated integration and   testing are structured:
+Inspect the `.github/workflows/ci.yml` pipeline file in the reference repository to understand how automated integration and testing are structured:
 
 ```yaml
 name: CI/CD Pipeline
@@ -121,8 +121,8 @@ jobs:
 ```
 
 #### Pipeline Best Practices Observed in `SorrentoMarina`:
-* **Pinned Action Versions:** Uses explicit major release tags (e.g., `actions/checkout@v4`) for security and stability.
-* **Build Caching:** Uses `cache: maven` to accelerate build times and avoid redundant dependency downloads.
+* **Pinned Action Versions:** Uses explicit major release tags (e.g., `actions/checkout@v5`) for security and stability.
+* **Build Caching:** Caches Maven dependencies (`actions/cache@v4`) to accelerate build times and avoid redundant dependency downloads.
 * **Container Verification:** Builds and tests the Docker container in CI prior to merge approval.
 * **Secrets Protection:** Injects sensitive database credentials dynamically using `${{ secrets.DB_PASSWORD }}` instead of hardcoded strings.
 
@@ -132,18 +132,20 @@ jobs:
 
 Now you will build and attach a robust CI/CD pipeline to your **own web application** repository for your Software Dependability course project!
 
-#### Task 3.1: Custom GitHub Workflow Creation (`.github/workflows/ci.yml`)
+### Step 3.1: Custom GitHub Workflow Creation (`.github/workflows/ci.yml`)
 Create a custom workflow file in your project repository under `.github/workflows/ci.yml`. Your pipeline must perform the following stages automatically:
 
 1. **Trigger Rules:** Configure the workflow to run on `push` and `pull_request` to `main`/`master`.
 2. **Automated Testing:** Run your application's test suite (e.g., `npm test`, `pytest`, `mvn test`).
 
-#### Task 3.2: CI/CD Documentation & Self-Audit (`CICD.md`)
+### Step 3.2: CI/CD Documentation & Self-Audit (`CICD.md`)
 Create a report named `CICD.md` (maximum **5,000 characters**) in your project repository and link to it from your root `README.md`. Your report must explain the stages of your `.github/workflows/ci.yml` file and describe how your pipeline guarantees build reproducibility and code quality.
 
 ---
 
-## 4. Submission Checklist
+## 5. Submission Checklist
+
+Before submitting your lab, ensure you have completed the following:
 
 - [ ] Registered/verified account via GitHub Education.
 - [ ] Completed basic GitHub Skills CI/CD courses.

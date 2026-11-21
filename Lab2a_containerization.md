@@ -169,19 +169,19 @@ Now it is time to apply these containerization practices to your **own web appli
 
 ### Student Requirements
 
-#### Task 4.1: Custom `Dockerfile` Creation
+#### Step 4.1: Custom `Dockerfile` Creation
 Create a `Dockerfile` in your course project repository. Ensure that the Docker best practices are adopted.
 
-#### Task 4.2: Multi-Container Orchestration (`docker-compose.yml`) with Secrets Management ⚠️
+#### Step 4.2: Multi-Container Orchestration (`docker-compose.yml`) with Secrets Management ⚠️
 Create a `docker-compose.yml` file that orchestrates:
 * Your custom application container.
 * At least **one supporting service** (e.g., PostgreSQL, MySQL, Redis, MongoDB).
 * A named volume attached to your database service to ensure data durability.
 * Health checks (`healthcheck`) and failure recovery policies (`restart: on-failure`).
 
-#### Task 4.3: Containerization and Self-Audit Reports (Submission Deliverable)
+#### Step 4.3: Containerization and Self-Audit Reports (Submission Deliverable)
 1. **Dockerfile and Docker-Compose Code & Hygiene Explanation:** Include your `Dockerfile` and `docker-compose.yml` and list the anti-patterns you avoided.
-2. Prepare a short report (5,000 characters max) in Markdown and name it `Docker.md`. The report should be linked from the `README.md` file that should be place in the root of your report.
+2. Prepare a short report (5,000 characters max) in Markdown and name it `Docker.md`. Link the report from the `README.md` file placed in the root of your repository.
 
 
 ---
@@ -287,6 +287,8 @@ jobs:
 ---
 
 ## 7. Submission Checklist
+
+Before submitting your lab, ensure you have completed the following:
 
 - [ ] Completed Docker Get-Started Tutorial.
 - [ ] Audited `SorrentoMarina` `Dockerfile` and `docker-compose.yml`.

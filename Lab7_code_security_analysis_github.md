@@ -57,7 +57,7 @@ In this stage, you will complete interactive GitHub training modules and explore
 2. Complete the following **Code Security and Analysis** modules:
    - [Secure your repository supply chain](https://github.com/skills/secure-repository-supply-chain)
    - [Introduction to CodeQL](https://github.com/skills/introduction-to-codeql)
-   - [Introduction to Security Scanning](https://github.com/skills/introduction-to-secret-scanning)
+   - [Introduction to Secret Scanning](https://github.com/skills/introduction-to-secret-scanning)
    - [Ship with Quality](https://github.com/skills/ship-with-quality)
 
 3. Observe how these features integrate seamlessly into the GitHub development workflow.
@@ -115,7 +115,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
@@ -329,7 +329,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -344,10 +344,13 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     name: Security Checks
+    permissions:
+      contents: read
+      security-events: write
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
@@ -374,6 +377,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+**Note:** The `security` job needs `security-events: write` to upload CodeQL results to the Security tab. The "Check for Dependabot alerts" step additionally requires that **Dependabot alerts are enabled** in the repository (*Settings* > *Code security and analysis*) and that the workflow is allowed to read them; if the check fails with a permission error, enable *Workflow permissions* > *Read and write permissions* in *Settings* > *Actions* > *General*, or run this check manually from the Security tab.
+
 ### Step 6.5: Document Your Security Strategy
 
 Create a report named `security.md` (maximum **5,000 characters**) in your project repository and link to it from your root `README.md`. Your report must include:
@@ -397,6 +402,8 @@ Create a report named `security.md` (maximum **5,000 characters**) in your proje
    - Number of secret scanning alerts
    - Number of Dependabot alerts (by severity)
    - Time to remediate vulnerabilities
+
+> **Next lab:** In [Lab 8](Lab8_secret_scanning_and_vulnerability_management.md) you will complement these GitHub-native security features with dedicated third-party tooling (GitGuardian, Snyk, and SonarQube Cloud) integrated into your CI/CD pipeline.
 
 ---
 

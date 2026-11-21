@@ -63,23 +63,68 @@ In this stage, you will learn the basics of JMH and set up your first microbench
 
 ### Step 2.1: Add JMH to Your Maven Project
 
-Add the JMH dependency to your `pom.xml` file:
+Add the JMH dependencies to your `pom.xml` file (pin the versions — avoid `LATEST`, which produces non-reproducible builds):
 
 ```xml
 <dependencies>
     <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core</artifactId>
-        <version>LATEST</version>
+        <version>1.37</version>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-generator-annprocess</artifactId>
-        <version>LATEST</version>
+        <version>1.37</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
+```
+
+Then add the following build plugins to your `pom.xml`. They are required to register the JMH annotation processor and to build the executable benchmarks JAR (`target/benchmarks.jar`) that you will run in Step 2.3:
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.openjdk.jmh</groupId>
+                        <artifactId>jmh-generator-annprocess</artifactId>
+                        <version>1.37</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.4.1</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
+                        <createDependencyReducedPom>true</createDependencyReducedPom>
+                        <transformers>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>org.openjdk.jmh.Main</mainClass>
+                            </transformer>
+                        </transformers>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 ### Step 2.2: Create Your First Microbenchmark
@@ -138,8 +183,8 @@ The output will show:
 Example output:
 ```
 Benchmark                    Mode  Cnt     Score    Error  Units
-MyFirstBenchmark.testArrayListAdd   thrpt   10  12345.678 ± 123.456  ops/ms
-MyFirstBenchmark.testLinkedListAdd  thrpt   10   8765.432 ±  98.765  ops/ms
+MyFirstBenchmark.testArrayListAdd   thrpt    5  12345.678 ± 123.456  ops/ms
+MyFirstBenchmark.testLinkedListAdd  thrpt    5   8765.432 ±  98.765  ops/ms
 ```
 
 ---
@@ -170,7 +215,7 @@ This will display the help message and verify the tool is working.
 Look for test cases that:
 - Test performance-critical methods
 - Have measurable execution time (>1ms)
-- Test pure functions: are determistic and do not have side effects 
+- Test pure functions: are deterministic and do not have side effects
 - Use standard JUnit 4 or JUnit 5 annotations
 
 ### Step 3.3: Convert Test to Benchmark
@@ -244,7 +289,7 @@ mvn install:install-file -Dfile=libs/jmh-core-1.37-all.jar \
     -Dpackaging=jar
 ```
 
-4. Modify your `pom.xml` file to include the following dependencies and plugins:
+4. Modify your `pom.xml` file to update the JMH dependencies you added in Step 2.1 to the AMBER-extended version (keep the `maven-compiler-plugin` and `maven-shade-plugin` configuration you added in Step 2.1, but make sure the annotation processor path points to JMH `1.37`):
 
 ```xml
 <dependencies>
@@ -260,47 +305,6 @@ mvn install:install-file -Dfile=libs/jmh-core-1.37-all.jar \
         <scope>provided</scope>
     </dependency>
 </dependencies>
-
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version>
-            <configuration>
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.openjdk.jmh</groupId>
-                        <artifactId>jmh-generator-annprocess</artifactId>
-                        <version>1.37</version>
-                    </path>
-                </annotationProcessorPaths>
-            </configuration>
-        </plugin>
-        
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <version>3.4.1</version>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>shade</goal>
-                    </goals>
-                    <configuration>
-                        <createDependencyReducedPom>true</createDependencyReducedPom>
-                        <transformers>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>org.openjdk.jmh.Main</mainClass>
-                            </transformer>
-                        </transformers>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
 ```
 
 ### Step 4.2: Configure Warm-up Phases
@@ -324,7 +328,7 @@ public class AMBERWarmupBenchmark {
 
     private java.util.List<String> list;
 
-    @Setup
+    @Setup(Level.Iteration)
     public void setup() {
         list = new java.util.ArrayList<>();
     }
@@ -337,6 +341,8 @@ public class AMBERWarmupBenchmark {
     }
 }
 ```
+
+Note the `@Setup(Level.Iteration)` annotation: it resets the `list` before every measurement iteration so the benchmark state does not grow unboundedly across the run.
 
 ### Step 4.3: AMBER Configuration Options
 
@@ -377,7 +383,7 @@ docker ps
 
 The service should be available at `localhost:50001` by default.
 
-You can run benchmarks with AMBER in from command line:
+You can run benchmarks with AMBER from the command line:
 ```bash
 java -jar target/your-project-1.0-SNAPSHOT.jar -hmodel "oscnn"
 ```
@@ -404,12 +410,12 @@ Now it's time to apply what you've learned to your course project!
 
 1. Add JMH dependencies to your `pom.xml`
 2. Create a `benchmarks` package in your project
-3. Write your first microbenchmark for a performance-critical method
+3. Write at least **three** microbenchmarks for performance-critical methods
 
 ### Step 5.2: Convert Test Cases to Benchmarks with JU2JMH
 
 1. Identify performance-critical test cases in your test suite
-2. Use JU2JMH to convert these tests to benchmarks
+2. Use JU2JMH to convert at least **two** of these tests to benchmarks
 3. Review and refine the generated benchmarks
 
 ### Step 5.3: Configure Warm-up with AMBER
@@ -443,10 +449,10 @@ jobs:
   benchmark:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       
       - name: Set up JDK 21
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'

@@ -369,12 +369,10 @@ Add these configuration parameters to your PITest plugin:
 
 ```bash
 # Run mutation testing with quality gates
-mvn clean verify
-# or specifically
 mvn pitest:mutationCoverage
 ```
 
-The build will fail if the mutation score falls below 80%.
+The build fails if the mutation score or the coverage falls below the configured thresholds — the `mutationCoverage` goal enforces the quality gates defined in `<configuration>`. Unlike JaCoCo's `check` goal, PITest is not bound to the Maven lifecycle, so `mvn clean verify` alone will not run mutation testing unless you add an explicit `<executions>` binding.
 
 #### Understanding Quality Gate Failures
 
@@ -457,13 +455,9 @@ Add the following steps to your `.github/workflows/ci.yml` file (after the test 
     token: ${{ secrets.CODECOV_TOKEN }}
     file: ./target/surefire-reports/TEST-*.xml
 
-- name: Run PiTest mutation testing
+- name: Run PITest mutation testing with quality gates
   run: mvn org.pitest:pitest-maven:mutationCoverage
-  continue-on-error: true
-
-- name: Run PITest with quality gates
-  run: mvn verify
-  # This will fail if mutation score is below 80%
+  # This will fail if the mutation score is below the configured threshold
 ```
 
 **Note**: Be careful about computing mutation score in your CI/CD pipeline as you may quickly exceed your GitHub Actions quota. Consider using a separate GitHub Actions workflow for mutation testing.

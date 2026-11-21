@@ -7,20 +7,42 @@ You can leverage these resources:
 - [OpenJML Tutorial](https://www.openjml.org/tutorial/)
 - [JML Language Specification](https://www.openjml.org/jmlspecs/)
 
+Before starting this lab, ensure you have completed the following:
+- **Lab1_CICD.md**: Continuous Integration & Continuous Delivery (CI/CD) for Software Dependability
+
 ---
 
 ## 1. Prerequisites & Required Tools
 
-Before starting this lab, ensure you have:
-- Java Development Kit (JDK) installed
-- OpenJML installed and available in your PATH
-- Basic understanding of Java classes and methods
+Before starting, ensure you have configured the following environments and resources:
 
-## 2. Stage 1: Setting Up OpenJML
+* **GitHub Account:** Register for student benefits via [GitHub Education](https://github.com/education).
+* **Java Development Kit (JDK)** installed.
+* **OpenJML** installed and available in your PATH (see Stage 2).
+* **IntelliJ IDEA or VS Code** with Java extensions installed.
+* Basic understanding of Java classes and methods.
+* **Course Project Repository:** Your local copy of the web application developed for the course project.
+
+---
+
+## 2. Stage 1: Theory & Lecture Alignment
+
+Review your lecture slides on **Formal Verification and Design by Contract**, keeping these core dependability principles in mind:
+
+### Key Dependability Concepts in Formal Verification
+
+1. **Design by Contract:** Preconditions, postconditions, and invariants form a contract between a class and its clients, making behavior explicit and checkable.
+2. **Class Invariants:** Invariants capture properties that must hold in every observable state, preventing invalid object states.
+3. **Static vs. Runtime Verification:** The Extended Static Checker (ESC) verifies specifications for *all* executions without running the code, while the Runtime Assertion Checker (RAC) instruments the bytecode to validate specifications for the executions you actually run.
+4. **Specification-Implementation Consistency:** Verification failures are not always bugs — they may reveal over-strong or wrong specifications, or a real implementation defect; the verifier helps distinguish the two.
+
+---
+
+## 3. Stage 2: Setting Up OpenJML
 
 To use OpenJML, you need to have it installed and available in your PATH. Follow the instructions at [https://www.openjml.org/installation.html](https://www.openjml.org/installation.html) to set up OpenJML.
 
-## 3. Stage 2: Understanding JML Specifications
+## 4. Stage 3: Understanding JML Specifications
 
 JML provides several key constructs for specifying behavior:
 
@@ -73,11 +95,11 @@ public class BankAccount {
 }
 ```
 
-## 4. Stage 3: Using ESC and RAC
+## 5. Stage 4: Using ESC and RAC
 
 OpenJML provides two main modes for verification:
 
-- **ESC (Escape Analysis)**: Static checking mode that verifies specifications without executing the code.
+- **ESC (Extended Static Checking)**: Static checking mode that verifies specifications without executing the code.
   ```bash
   openjml -esc User.java
   ```
@@ -89,7 +111,7 @@ OpenJML provides two main modes for verification:
   java -ea -cp bin User
   ```
 
-## 5. Stage 4: Example - Adding Specifications to a Web Application
+## 6. Stage 5: Example - Adding Specifications to a Web Application
 
 Consider a simple `User` class for a web application:
 
@@ -204,7 +226,7 @@ public class User {
 ```
 
 
-## Using OpenJML with Lombok
+## 7. Stage 6: Using OpenJML with Lombok
 
 If your project uses **Lombok** (e.g., `@Getter`, `@Setter`, `@Data`), OpenJML may not be able to verify your specifications because Lombok generates code at compile time. To use OpenJML with Lombok, you should "delombok" your source code before running OpenJML.
 
@@ -222,9 +244,11 @@ If your project uses **Lombok** (e.g., `@Getter`, `@Setter`, `@Data`), OpenJML m
     ```
 
 
+## 8. Stage 7: Course Project Application (Student Assignment)
+
 Now it's time to apply what you've learned to your course project! Follow these steps to add formal specifications and verify them:
 
-### Step 5.1: Identify Verifiable Components
+### Step 7.1: Identify Verifiable Components
 
 Review your project and identify the key components that can benefit from formal specifications. When applying formal verification techniques like JML to web applications, focus on:
 
@@ -239,7 +263,7 @@ Review your project and identify the key components that can benefit from formal
 - View/presentation logic classes (responsible for rendering views or formatting output)
 - Third-party integration classes (classes that interact with external APIs or services)
 
-### Step 5.2: Add JML Specifications
+### Step 7.2: Add JML Specifications
 
 For each identified component, add appropriate JML specifications:
 
@@ -280,7 +304,7 @@ public class UserService {
 }
 ```
 
-### Step 5.3: Configure OpenJML Paths
+### Step 7.3: Configure OpenJML Paths
 
 To verify your project, OpenJML needs to know where your compiled classes, source files, and JML specifications are located. You can specify these using the following flags:
 
@@ -291,20 +315,20 @@ To verify your project, OpenJML needs to know where your compiled classes, sourc
 **Example Command:**
 If your project is in a folder called `project_root`, and you have a `lib` folder for dependencies, you might run:
 ```bash
-openjml -esc -cp "project_root/lib;project_root/bin" -sourcepath project_root/src -specs-path project_root/src src/main/java/com/example/UserService.java
+openjml -esc -cp "project_root/lib:project_root/bin" -sourcepath project_root/src -specs-path project_root/src src/main/java/com/example/UserService.java
 ```
 *Note: On macOS/Linux, use `:` as a separator; on Windows, use `;`.*
 
-### Step 5.4: Static Verification with ESC
+### Step 7.4: Static Verification with ESC
 
 Use ESC to statically verify your specifications:
 
 ```bash
 # Verify a single file
-openjml -esc -cp "project_root/lib;project_root/bin" -sourcepath project_root/src -specs-path project_root/src src/main/java/com/example/UserService.java
+openjml -esc -cp "project_root/lib:project_root/bin" -sourcepath project_root/src -specs-path project_root/src src/main/java/com/example/UserService.java
 
 # Verify all Java files in a directory
-find src/main/java -name "*.java" -exec openjml -esc -cp "project_root/lib;project_root/bin" -sourcepath project_root/src -specs-path project_root/src {} \;
+find src/main/java -name "*.java" -exec openjml -esc -cp "project_root/lib:project_root/bin" -sourcepath project_root/src -specs-path project_root/src {} \;
 ```
 
 Address any verification errors by:
@@ -312,14 +336,14 @@ Address any verification errors by:
 - Fixing implementation bugs
 - Adjusting invariants or preconditions
 
-### Step 5.5: Runtime Verification with RAC
+### Step 7.5: Runtime Verification with RAC
 
 Use RAC to runtime-verify your specifications:
 
 ```bash
 # Compile with RAC
 mkdir -p target/rac
-openjml -rac -d target/rac -cp "project_root/lib;project_root/bin" -sourcepath project_root/src -specs-path project_root/src src/main/java/com/example/UserService.java
+openjml -rac -d target/rac -cp "project_root/lib:project_root/bin" -sourcepath project_root/src -specs-path project_root/src src/main/java/com/example/UserService.java
 
 # Run with assertions enabled
 java -ea -cp target/rac com.example.UserService
@@ -327,7 +351,7 @@ java -ea -cp target/rac com.example.UserService
 
 Test edge cases and error conditions to ensure your specifications hold at runtime.
 
-### Step 5.6: Document Your JML Verification Results
+### Step 7.6: Document Your JML Verification Results
 
 After completing the verification tasks, document your findings in a `verification.md` (maximum **5,000 characters**) file in your project's root directory. This file should include:
 
@@ -338,9 +362,11 @@ After completing the verification tasks, document your findings in a `verificati
 - **Verification Success**: Confirm which specifications were successfully verified and which ones failed.
 - **Lessons Learned**: Discuss what you learned about writing effective JML specifications and the challenges you encountered.
 
+Link this report in your repository's `README.md`.
+
 ---
 
-## Submission Checklist
+## 9. Submission Checklist
 
 Before submitting your work, ensure you have:
 - [ ] Set up OpenJML in your project.
@@ -350,4 +376,5 @@ Before submitting your work, ensure you have:
 - [ ] Used RAC to runtime-verify the specifications.
 - [ ] Documented your JML verification results in a `verification.md` file (max 5,000 characters).
 - [ ] Interpreted verification results and debugged specification errors.
+- [ ] Linked `verification.md` from your root `README.md`.
 - [ ] Committed the `verification.md` file to your GitHub repository.

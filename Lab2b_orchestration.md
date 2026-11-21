@@ -31,7 +31,7 @@ Review the provided lecture slides (`Lab2b_Orchestration.pdf`) and keep the foll
    - **Docker Swarm:** Docker's built-in orchestration tool that uses a declarative approach for service definition, with a manager-worker architecture where the manager node schedules services and worker nodes execute containers. It provides basic scheduling, scaling, and self-healing capabilities.
    - **Kubernetes (K8s):** A more feature-rich container orchestration platform developed by Google, using a master-node architecture with advanced features like auto-scaling, rolling updates, service discovery, load balancing, and extensive ecosystem integration for production-grade deployments.
 
-## 3. Stage 2. Starting Minikube
+## 3. Stage 2: Starting Minikube
 
 Once Minikube is installed, start a local cluster:
 
@@ -41,11 +41,11 @@ minikube start --driver=docker
 
 This command starts a Minikube cluster using Docker as the driver.
 
-## 4. Stage 3. Kubernetes 101 Tutorial
+## 4. Stage 3: Kubernetes 101 Tutorial
 
 Follow the official Kubernetes 101 tutorial: [https://minikube.sigs.k8s.io/docs/tutorials/kubernetes_101/](https://minikube.sigs.k8s.io/docs/tutorials/kubernetes_101/)
 
-## 5. Stage 4. Stopping Minikube
+## 5. Stage 4: Stopping Minikube
 
 When you are done working with Minikube, stop the cluster to free up resources:
 
@@ -53,7 +53,9 @@ When you are done working with Minikube, stop the cluster to free up resources:
 minikube stop
 ```
 
-## Final Checklist
+## 6. Submission Checklist
+
+Before finishing the lab, ensure you have completed the following:
 
 - [ ] Installed Minikube following the official guide
 - [ ] Started Minikube cluster with Docker driver
